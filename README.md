@@ -8,22 +8,22 @@ specific projects.
 
 The following typographical conventions are used:
 
-Italic
+Italic\n
 Indicates new terms, URLs, email addresses, filenames, and file extensions.
 
-Constant width
+Constant width\n
 Used for program listings, as well as within paragraphs to refer to program elements such as
 variable or function names, databases, data types, environment variables, statements, and
 keywords.
 
-Constant width bold
+Constant width bold\n
 Shows commands or other text that should be typed literally by the user.
 
-Constant width italic
+Constant width italic\n
 Shows text that should be replaced with user-supplied values or by values determined by context.
 
-TIP
+TIP\n
 This icon signifies a tip, suggestion, or general note.
 
-WARNING
+WARNING\n
 This icon indicates a warning or caution.
