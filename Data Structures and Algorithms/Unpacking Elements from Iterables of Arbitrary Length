@@ -1,0 +1,136 @@
+'''If one needs to unpack N elements from an iterable, 
+but the iterable is longer than N elements, they shall 
+recieve a "too many value to unpack" exception.'''
+
+'''To solve this issue, the Python "star expressions" can be used (* and **). 
+ie, suppose you run a course and decide at the end of the semester that 
+you're going to drop the first and last homework grades, and only average 
+the rest of them. If there are only 4 assignments, this would be easy to 
+unpack, but not if there are 40. The star expression makes this easy however. 
+You can use the below function:'''
+
+def drop_first_last(grades):
+  first, *middle, last = grades
+  return avg(middle)
+  
+'''The above code takes the variables prior to the * expression and assigns to 
+them the elements of the iterable which preceed the * expression (if there were
+3 variables, ie first, second, third, *middle, last; then first would point to 
+grades[0], second to grades[1], and third to grades[2]). This is the same for 
+the variables following the * variable.'''
+
+'''Another use case of this would be assuming that one has records that consist of 
+a name and email address, followed by an arbitrary number of phone numbers. One 
+could unpack the records like this:'''
+
+>>> user_record = ('Greg', 'greg_1995@hotmail.com', '111-222-3312', '111-222-4953')
+>>> name, email, *phone_numbers = user_record
+>>> name
+'Greg'
+>>> email
+'greg_1995@hotmail.com'
+>>> phone_numbers
+['111-222-3312', '111-222-4953']
+
+'''One should note that the variables will always be unpacked into a list, regardless 
+of how many phone numbers are unpacked, even if none are. For this reason, and code that 
+uses phone_numbers wont have to account for the possibility that it is not a list or 
+perform extra type checking.'''
+
+'''The * variable can be used as the first in a list. Suppose one has a sequence of values 
+which represent a company's sales for the last 5 years. If one wanted to compare the most
+recent annual sales with the average sales of the first 4 years, the following is possible:
+
+*trailing_years, current_year = annual_sales_record
+trailing_avg = sum(trailing_years) / len(trailing_years)
+return avg_comparison(trailing_avg, current_year)
+
+'''From the Python interpreter, this looks like:'''
+
+>>> *trailing, current = [1_000_000, 1_500_000, 2_100_000, 1_700_000, 900_000]
+>>> trailing
+[1000000, 1500000, 2100000, 1700000]
+>>> current
+900000
+
+''' The use of extended iterable unpacking is tailored to unpacking iterables of unknown
+or arbitrary length. Often, these iterables have a known component or pattern (such as everything
+after element 1 is an account number), and the * unpacking allows one to leverage these 
+patterns easily.'''
+
+'''Notably, the * syntax is expecially useful when one iterates over a sequence of tuples which 
+varying in length. Take for example, a sequence of tagged tuples:
+  
+records = [
+  ('suh', 99, 100),
+  ('oop', 'ye'),
+  ('suh', 12, 1)
+  ]
+  
+ def do_suh(a, b):
+   print('suh', a, b)
+   
+ def do_oop(string)
+   print('oop', string)
+   
+ for tag, *args in records:
+   if tag == 'suh':
+     do_suh(*args)
+   elif tag == 'oop':
+     do_oop(*args)
+     
+''' * unpacking also is useful in combination with certain kinds of string processing operations,
+including splitting. ie:'''
+
+>>> line = 'Janet:*:-3:-8:Random User:int_value:/var/empty:/usr/bin/true'
+>>> uname, *fields, homedir, sh = line.split(':')
+>>> uname
+'Janet'
+>>> homedir
+'var/empty'
+>>> sh
+'/usr/bin/true'
+>>> fields
+['*', '-3', '-8', 'Random User', 'int_value']
+
+'''Another instance of the * use is if one wishes to unpack values and discard them. It's not possible
+to just use a bare *, but a common practice throwaway variable name such as _ can be used. ie:'''
+
+>>> record = ('AAPL', 200, 354.1, (2018, 1, 1))
+>>> ticker, *_, (*_, year) = record
+>>> ticker
+'AAPL'
+>>> year
+2018
+>>> _
+[2018, 1]
+
+'''There is similarity between using * unpacking and list-processing feature of various functional languages. 
+If you have a list, it can be easily split into head and tail components like this:'''
+
+>>> items = ['a', 'b', 'c', 'd', 'e']
+>>> head, *tail = items
+>>> head
+'a'
+>>> tail
+['b', 'c', 'd', 'e']
+
+'''From this, it is possible to imagine writing a fucntion taht performs such splitting order to carry out a 
+clever recursive algorithm. ie:'''
+
+>>> def sum(items):
+...   head, *tail = items
+...   return head + sum(tail) if tail else head
+...
+>>> items = [1, 2, 3, 4, 5]
+>>> sum(items)
+15
+>>>
+
+'''One should note that recursion is not a strong Python feature because of inherent recursion limit. This 
+means that the above example is not recommended for actual development. A means to improve recursion includes 
+cacheing calculated values, but this is outside of the scope of this note.'''
+
+''' The ** expression works simillarly to the * expression, but for dictionaries'''
+
+  
