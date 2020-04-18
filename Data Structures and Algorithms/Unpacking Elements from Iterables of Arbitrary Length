@@ -2,7 +2,7 @@
 but the iterable is longer than N elements, they shall 
 recieve a "too many value to unpack" exception.'''
 
-'''To solve this issue, the Python "star expressions" can be used (* and **). 
+'''To solve this issue, the Python "star expressions" can be used ( * ). 
 ie, suppose you run a course and decide at the end of the semester that 
 you're going to drop the first and last homework grades, and only average 
 the rest of them. If there are only 4 assignments, this would be easy to 
@@ -130,7 +130,3 @@ clever recursive algorithm. ie:'''
 '''One should note that recursion is not a strong Python feature because of inherent recursion limit. This 
 means that the above example is not recommended for actual development. A means to improve recursion includes 
 cacheing calculated values, but this is outside of the scope of this note.'''
-
-''' The ** expression works simillarly to the * expression, but for dictionaries'''
-
-  
