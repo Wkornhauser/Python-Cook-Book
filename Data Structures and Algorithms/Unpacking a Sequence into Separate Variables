@@ -1,101 +1,68 @@
-# A N-element tuple or sequence that needs to be unpacked into a collection of N variables exists.
+'''A N-element tuple or sequence that needs to be unpacked into a collection of N variables exists.'''
 
-# A sequence or iterable can be unpacked into variables using a simple assignment operation. The sole requirement
- is that the number of variables and structure match the sequence. ie:
+'''A sequence or iterable can be unpacked into variables using a simple assignment operation. The sole requirement
+is that the number of variables and structure match the sequence. ie:'''
  
  >>> x = (7, 9)
- 
  >>> a, b = x
- 
  >>> a
- 
  7
- 
  >>> b
- 
  9
- 
  >>>
- 
- 
- # This is not restricted to only one type. The iterable can posses int, float, str, bool, etc..., so long as the number of 
- variables and structure match the sequence! ie:
+  
+ '''This is not restricted to only one type. The iterable can posses int, float, str, bool, etc..., so long as the number of 
+ variables and structure match the sequence! ie:'''
  
  >>> list1 = ['AAPL', 200, 354.1, (2018, 01, 01)]
- 
  >>> ticker, shares, current_price, date = list1
- 
  >>>ticker
- 
  'APPL'
- 
  >>> date
- 
  (2018, 01, 01)
  
- # Notice that the tuple in the list was assigned to a single variable, date. 
- This tuple can further be unpacked if the code had been written as follows:
+ '''Notice that the tuple in the list was assigned to a single variable, date. 
+ This tuple can further be unpacked if the code had been written as follows:'''
  
  >>> ticker, shares, current_price, (year, month, day) = list1
- 
  >>> name
- 
  'APPL'
- 
  >>> year
- 
  2018
- 
  >>> month
- 
  01
  
- # If when you try to unpack a mismatch in the number of elements exists, an error will arise. ie
+ '''If when you try to unpack a mismatch in the number of elements exists, an error will arise. ie'''
  
  >>> z = ('Hello', 7)
- 
  >>> a, b, c = z
- 
  Traceback (most recent call last):
- 
    File "<stdin>", line 1, in <module>
-   
  ValueError: need more than 2 values to unpack
  
- # As mentioned, so long as the object which one is trying to unpack is iterable, unpacking may be performed. 
- This extends beyonds lists and tuples to strings, files, iterators, and generators. ie:
+'''As mentioned, so long as the object which one is trying to unpack is iterable, unpacking may be performed. 
+ This extends beyonds lists and tuples to strings, files, iterators, and generators. ie:'''
  
 >>> string = 'Python'
- 
 >>> a, b, c, d, e, f = string
- 
 >>> a
-
 'P'
-
 >>> e
-
 'o'
 
-# If you're unpacking and you wish to discard a specific value, no special Python syntax exists. However,
-the "_" character is typically used as a throwaway variable. ie:
+'''If you're unpacking and you wish to discard a specific value, no special Python syntax exists. However,
+the "_" character is typically used as a throwaway variable. ie:'''
 
 >>> list1 = ['AAPL', 200, 354.1, (2018, 01, 01)]
- 
 >>> _, shares, current_price, _ = list1
-
 >>> shares
-
 200
-
 >>> price
-
 354.1
 
-# Note! Just because you have assigned the first and last index of list1 to the _ variable, does not mean that the 
-value is discarded. If you were to call _ immediately following the above execution... :
+''Note! Just because you have assigned the first and last index of list1 to the _ variable, does not mean that the 
+value is discarded. If you were to call _ immediately following the above execution... :'''
 
 >>> _
-
 (2018, 01, 01)
  
