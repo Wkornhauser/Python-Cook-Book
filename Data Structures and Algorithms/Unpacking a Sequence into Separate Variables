@@ -14,12 +14,12 @@ is that the number of variables and structure match the sequence. ie:'''
  '''This is not restricted to only one type. The iterable can posses int, float, str, bool, etc..., so long as the number of 
  variables and structure match the sequence! ie:'''
  
- >>> list1 = ['AAPL', 200, 354.1, (2018, 01, 01)]
+ >>> list1 = ['AAPL', 200, 354.1, (2018, 1, 1)]
  >>> ticker, shares, current_price, date = list1
  >>>ticker
  'APPL'
  >>> date
- (2018, 01, 01)
+ (2018, 1, 1)
  
  '''Notice that the tuple in the list was assigned to a single variable, date. 
  This tuple can further be unpacked if the code had been written as follows:'''
@@ -30,7 +30,7 @@ is that the number of variables and structure match the sequence. ie:'''
  >>> year
  2018
  >>> month
- 01
+ 1
  
  '''If when you try to unpack a mismatch in the number of elements exists, an error will arise. ie'''
  
@@ -53,7 +53,7 @@ is that the number of variables and structure match the sequence. ie:'''
 '''If you're unpacking and you wish to discard a specific value, no special Python syntax exists. However,
 the "_" character is typically used as a throwaway variable. ie:'''
 
->>> list1 = ['AAPL', 200, 354.1, (2018, 01, 01)]
+>>> list1 = ['AAPL', 200, 354.1, (2018, 1, 1)]
 >>> _, shares, current_price, _ = list1
 >>> shares
 200
@@ -64,5 +64,5 @@ the "_" character is typically used as a throwaway variable. ie:'''
 value is discarded. If you were to call _ immediately following the above execution... :'''
 
 >>> _
-(2018, 01, 01)
+(2018, 1, 1)
  
