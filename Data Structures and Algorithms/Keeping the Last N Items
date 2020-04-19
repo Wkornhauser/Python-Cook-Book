@@ -1,0 +1,89 @@
+''' Suppose that you desire to keep a limited history of the last few items seen during iteration of during another
+kind of processing.'''
+
+'''This task is a perfect time for using collections.deque. The following code performs a simple text match on a sequence
+of lines and yields the matching line along with the previous N lines of context when found:'''
+
+  from collections import deque
+  
+  def search(lines, pattern, history=7):
+    previous_lines = deque(maxlen=history)
+    for line in lines:
+      if pattern in line:
+        yield line, previous lines
+      previous_lines.append(line)
+      
+''' The above code works by setting the maximum length of previous_lines to 7, initializing previous_lines to an empty object, iterating 
+through lines for each element, and then either appending that element to the previous_lines object (if the line did not contain
+the pattern searched, or returning the first line where the pattern was found, and then anywhere from 0 to 7 previous lines'''
+
+''' Here is an example of use on a file'''
+
+  if __name__ == 'main':
+    with open('filetosearch.txt') as f:
+      for line, prevlines in search(f, 'python', 7):
+        for pline in prevlines:
+          print(pline, end='')
+        print(line, end='')
+        print('-'*20)
+        
+''' The above code will perform the search function defined previously, which will yield both line and previous_lines. previous_lines 
+from the search function shall be assigned to prevlines. Then, each of the 0 to 7 lines in prevlines (which are denoted as pline), shall
+be iterated through, and printed. Since the keyword argument end is set to '', the prevlines will be printed together in line. By 
+default the end argument for the print function is set to '\n' (new line). After this is printed, the line where the pattern was found 
+shall be printed. Then, 20 dashes ('-') shall be printed.'''
+
+'''When one is writing code to search for items, it is common to utilize a generator function involving yield, which was seen above.
+What this does is decouples the process of searching from the code that uses the results. Work on generators is seen in
+Python-Cook-Book/Iterators and Generators/Creating New Iteration Patterns with Generators . '''
+
+'''In the use of deque(maxlen=N), a fixed size queue is created. If new items are added while the queue is full (at len = maxlen = N),
+then the oldest item is automatically removed. ie:'''
+
+>>> q = deque(maxlen=3)
+>>> q.append('a')
+>>> q.append('b')
+>>> q.append('c')
+>>> q
+deque(['a', 'b', 'c'], maxlen=3)
+>>> q.append('d')
+>>> q
+deque(['b', 'c', 'd'], maxlen=3)
+>>> q.append('e')
+>>> q
+deque(['c', 'd', 'e'], maxlen=3)
+
+''' Obviously, it is possible to manually perform this kind of operation on a list (use of .append() and del, etc), the use of the 
+queue solution is "far more elegant" and alegedly runs a lot fater (I am unsure of the truth to this as there is no explaination 
+behind the deque function)'''
+
+'''In a more general scenarion, a deque is useful whenever a simple queue structure is required. Should no maximum size (maxlen) be 
+specified, then a unbounded queue is created that allows for appending and popping of items on either end. ie:'''
+
+>>> q = deque()
+>>> q.append('a')
+>>> q.append('b')
+>>> q.append('c')
+>>> q
+deque(['a', 'b', 'c'])
+>>> q.appendleft('d')
+>>> q
+deque(['d', 'a', 'b', 'c'])
+>>>q.pop()
+'c'
+>>> q
+deque(['d', 'a', 'b'])
+>>>q.popleft()
+'d'
+
+''' Adding or popping items from either end of a queue has O(1) complexity. This is unlike a list where inserting or removing items from
+the front of the list is O(N). What this means, is that the algorithm with the O(1) complexity will always take a constant time,
+regardless of the size of the dataset (queue size, list size, etc), while the algorithm with the O(N) complexity will take time 
+which is proportional to the size of the set, where a set twice the size takes twice as long. This implicates the increase in 
+efficiency in the use of the queue method versus the list method.'''
+
+
+
+
+
+
